@@ -1,0 +1,19 @@
+---
+title: "Congaree Big Trees"
+author: "Carter Allen"
+date: "1/28/2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,cache = TRUE,warning = FALSE,message = FALSE)
+library(tidyverse)
+library(maps)
+library(mapdata)
+library(leaflet)
+```
+
+```{r}
+cong <- read_csv()
+```
+

@@ -1,0 +1,257 @@
+---
+title: "Moral Engagement Analysis"
+author: "Carter Allen"
+date: "1/23/2018"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,cache = TRUE,warning = FALSE)
+library(tidyverse)
+library(reshape2)
+library(knitr)
+library(broom)
+```
+
+```{r,include=FALSE}
+surv <- read_csv("survey.csv",na = c("?",""))
+```
+
+## Variable Summaries
+
+Below are summaries of the marginal distributions of each variable in the data set before imputation.
+
+```{r, echo = FALSE}
+ggplot(data = surv, aes(x = purp)) + 
+  geom_histogram(stat = "count",na.rm = FALSE)  +
+  ggtitle("Distribution of Purpose Responses") +
+  theme(panel.background = element_rect(fill = "white"),
+        text = element_text(family = "serif")) + 
+  stat_count(aes(y=..count.., label=..count..), 
+             geom="text", vjust=-.5, size = 3) + 
+  xlab("Purpose Code")
+```
+
+```{r, echo = FALSE}
+ggplot(data = surv, aes(x = as.character(yrs))) + 
+  geom_histogram(stat = "count",na.rm = FALSE) + 
+  stat_count(aes(y=..count.., label=..count..), 
+             geom="text", vjust=-.5, size = 3) +
+  ggtitle("Distribution of Years-Worked Responses") +
+  theme(panel.background = element_rect(fill = "white"),
+        text = element_text(family = "serif")) +
+  xlab("Years Worked Code")
+```
+
+```{r, echo = FALSE}
+ggplot(data = surv, aes(x = as.character(age))) + 
+  geom_histogram(stat = "count",na.rm = FALSE) + 
+  stat_count(aes(y=..count.., label=..count..), 
+             geom="text", vjust=-.5, size = 3) +
+  ggtitle("Distribution of Age Responses") +
+  theme(panel.background = element_rect(fill = "white"),
+        text = element_text(family = "serif")) +
+  xlab("Age Code")
+```
+
+```{r, echo = FALSE}
+ggplot(data = surv, aes(x = as.character(gender))) + 
+  geom_histogram(stat = "count",na.rm = FALSE) + 
+  stat_count(aes(y=..count.., label=..count..), 
+             geom="text", vjust=-.5, size = 3) +
+  ggtitle("Distribution of Gender Responses") +
+  theme(panel.background = element_rect(fill = "white"),
+        text = element_text(family = "serif")) +
+  xlab("Gender Code")
+```
+
+```{r, echo = FALSE}
+ggplot(data = surv, aes(x = as.character(emp))) + 
+  geom_histogram(stat = "count",na.rm = FALSE) + 
+  stat_count(aes(y=..count.., label=..count..), 
+             geom="text", vjust=-.5, size = 3) +
+  ggtitle("Distribution of Employer Responses") +
+  theme(panel.background = element_rect(fill = "white"),
+        text = element_text(family = "serif")) +
+  xlab("Employer Code")
+```
+
+```{r, echo = FALSE}
+surv %>%
+  melt(id.vars = c("id","purp","yrs","age","gender","emp"),
+       variable.name = "q",
+       value.name = "a") %>%
+  ggplot(aes(x = as.character(a))) +
+  geom_histogram(stat = "count",na.rm = FALSE) + 
+  stat_count(aes(y=..count.., label=..count..), 
+             geom="text", vjust=-.5, size = 1) +
+  facet_wrap(~ q) + 
+  ggtitle("Distribution of Question Responses") +
+  theme(panel.background = element_rect(fill = "white"),
+        text = element_text(family = "serif")) +
+  xlab("Question Response")
+```
+
+## Imputation
+
+An attempt will be made to impute missing values by sampling from the marginal distribution of that variable (excluding missing values). 
+
+### Function Definition
+
+The following function handles the imputation scheme described above. 
+
+```{r}
+# Custom function for missing data imputation
+# Samples from column marginals to impute missing values
+
+impute_survey <- function(df)
+{
+  n_cols = dim(df)[2]
+  n_rows = dim(df)[1]
+  
+  for(i in 1:n_cols)
+  {
+    col_vec = na.omit(df[,i])
+    
+    for(j in 1:n_rows)
+    {
+      if(is.na(df[j,i]))
+      {
+        df[j,i] = sample(col_vec,1,replace = TRUE)
+      }
+    }
+  }
+  return(df)
+}
+```
+
+### Implementation
+
+```{r}
+surv_imp <- impute_survey(surv)
+```
+
+The imputation function has been implemented and now we have a complete data frame called `surv_imp`.
+
+## Exploratory Analysis (Post Imputation)
+
+```{r, echo=FALSE}
+surv_tdy <- melt(surv_imp,id.vars = 
+                   c("id","purp","yrs","age","gender","emp"),
+                 variable.name = "question",
+                 value.name = "answer")
+```
+
+```{r,echo=FALSE}
+ggplot(data = surv_tdy, aes(x = answer)) +
+  geom_histogram(stat = "count") + 
+  scale_x_discrete(limits = 1:7) + 
+  facet_wrap(~ question) +
+  theme(panel.background = element_rect(fill = "white"),
+        text = element_text(family = "serif")) +
+  ggtitle("Distribution of Question Responses after Imputation") +
+  stat_count(aes(y=..count.., label=..count..), 
+             geom="text", vjust=-.5, size = 1)
+```
+
+```{r, echo=FALSE}
+ggplot(data = surv_tdy, aes(x = answer, fill = as.factor(gender))) +
+  geom_histogram(stat = "count") + 
+  scale_x_discrete(limits = 1:7) + 
+  facet_wrap(~ question)+
+  theme(panel.background = element_rect(fill = "white"),
+        text = element_text(family = "serif")) +
+  ggtitle("Distribution of Question Answers") +
+  labs(subtitle = "Color filled by gender")
+```
+
+```{r, echo=FALSE}
+ggplot(data = surv_tdy, aes(x = answer, fill = as.factor(emp))) +
+  geom_histogram(stat = "count") + 
+  scale_x_discrete(limits = 1:7) + 
+  facet_wrap(~ question)+
+  theme(panel.background = element_rect(fill = "white"),
+        text = element_text(family = "serif")) +
+  ggtitle("Distribution of Question Answers") +
+  labs(subtitle = "Color filled by employer")
+```
+
+```{r, echo=FALSE}
+ggplot(data = surv_tdy, aes(x = answer, fill = as.factor(purp))) +
+  geom_histogram(stat = "count") + 
+  scale_x_discrete(limits = 1:7) + 
+  facet_wrap(~ question)+
+  theme(panel.background = element_rect(fill = "white"),
+        text = element_text(family = "serif")) +
+  ggtitle("Distribution of Question Answers") +
+  labs(subtitle = "Color filled by purpose respnse")
+```
+
+## Modeling
+
+Will define variables `q1_q8` for the row-wise sum of colums `q1` through `q8` and `q9_q16` likewise. 
+
+```{r}
+surv_imp <- surv_imp %>%
+  mutate(q1_q8 = rowSums(select(.,q1:q8)),
+         q9_q16 = rowSums(select(.,q9:q16)))
+```
+
+```{r, echo=FALSE}
+ggplot(data = surv_imp,aes(x = purp, y = q1_q8)) +
+  geom_violin() +
+  geom_point(alpha = 0.25) + 
+  theme(panel.background = element_rect(fill = "white"),
+        text = element_text(family = "serif")) +
+  ggtitle("Density curves of q1_q8 by Purpose Response") +
+  labs(subtitle = "With points overlaid")
+```
+
+```{r, echo=FALSE}
+surv_imp %>%
+  group_by(purp) %>%
+  summarise(mean_q1_q8 = mean(q1_q8),
+            sdv_q1_q8 = sd(q1_q8),
+            n = n(),
+            CI_95_Lower = t.test(q1_q8)$conf.int[1],
+            CI_95_Upper = t.test(q1_q8)$conf.int[2]) %>%
+  kable(caption = "Summary Statistics of q1_q8 vs. Purpose")
+```
+
+
+```{r, echo=FALSE}
+surv_anova_q1_q8 <- aov(data = surv_imp, q1_q8 ~ purp)
+surv_anova_q1_q8 %>% 
+  broom::tidy() %>%
+  kable(caption = "ANOVA table of q1_q8 ~ purpose")
+```
+
+\newpage
+
+```{r, echo=FALSE}
+ggplot(data = surv_imp,aes(x = purp, y = q9_q16)) +
+  geom_violin() +
+  geom_point(alpha = 0.25) + 
+  theme(panel.background = element_rect(fill = "white"),
+        text = element_text(family = "serif")) +
+  ggtitle("Density curves of q9_q16 by Purpose Response") +
+  labs(subtitle = "With points overlaid")
+```
+
+```{r, echo=FALSE}
+surv_imp %>%
+  group_by(purp) %>%
+  summarise(mean_q9_q16 = mean(q9_q16),
+            sdv_q9_q16 = sd(q9_q16),
+            n = n(),
+            CI_95_Lower = t.test(q9_q16)$conf.int[1],
+            CI_95_Upper = t.test(q9_q16)$conf.int[2]) %>%
+  kable(caption = "Summary Statistics of q9_q16 vs. Purpose")
+```
+
+```{r, echo=FALSE}
+surv_anova_q9_q16 <- aov(data = surv_imp, q9_q16 ~ purp)
+surv_anova_q9_q16 %>% 
+  broom::tidy() %>%
+  kable(caption = "ANOVA table of q9_q16 ~ purpose")
+```
