@@ -29,3 +29,71 @@ Untracked files:
 
 nothing added to commit but untracked files present (use "git add" to track)
 ]0;~/Documents/RandomAnalyses/CongareeTreesCarters-MacBook-Pro:CongareeTrees carter$ git add -A
+]0;~/Documents/RandomAnalyses/CongareeTreesCarters-MacBook-Pro:CongareeTrees carter$ git status
+On branch master
+Your branch is up-to-date with 'origin/master'.
+
+Changes to be committed:
+  (use "git reset HEAD <file>..." to unstage)
+
+	[32mnew file:   .Rproj.user/284780B9/console06/9D8433B7[m
+	[32mnew file:   .Rproj.user/284780B9/console06/9D8433B7.env[m
+	[32mnew file:   .Rproj.user/284780B9/console06/INDEX001[m
+	[32mnew file:   .Rproj.user/284780B9/sources/prop/2EFE5642[m
+	[32mnew file:   .Rproj.user/284780B9/sources/prop/A41BB821[m
+	[32mnew file:   .Rproj.user/284780B9/sources/prop/INDEX[m
+	[32mnew file:   .Rproj.user/284780B9/sources/s-9D33684/3F6D23C3-contents[m
+	[32mnew file:   .Rproj.user/284780B9/sources/s-9D33684/7D240C39[m
+	[32mnew file:   .Rproj.user/284780B9/sources/s-9D33684/7D240C39-contents[m
+	[32mnew file:   .Rproj.user/284780B9/sources/s-9D33684/B103C241[m
+	[32mnew file:   .Rproj.user/284780B9/sources/s-9D33684/B103C241-contents[m
+	[32mnew file:   .Rproj.user/284780B9/sources/s-9D33684/F7A91493[m
+	[32mnew file:   .Rproj.user/284780B9/sources/s-9D33684/F7A91493-contents[m
+	[32mnew file:   .Rproj.user/284780B9/sources/s-9D33684/lock_file[m
+	[32mnew file:   .Rproj.user/shared/notebooks/47E89EA4-CongareeTrees/1/284780B99D33684/chunks.json[m
+	[32mnew file:   .Rproj.user/shared/notebooks/47E89EA4-CongareeTrees/1/s/chunks.json[m
+	[32mnew file:   .Rproj.user/shared/notebooks/patch-chunk-names[m
+	[32mnew file:   .Rproj.user/shared/notebooks/paths[m
+	[32mnew file:   CongareeTrees.Rmd[m
+	[32mnew file:   CongareeTrees.Rproj[m
+	[32mnew file:   cong_trees.csv[m
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+	[31mmodified:   .Rproj.user/284780B9/console06/9D8433B7[m
+
+]0;~/Documents/RandomAnalyses/CongareeTreesCarters-MacBook-Pro:CongareeTrees carter$ git comit[K[Kmit
+[?2004h[master 24da84a] first commit:
+ 21 files changed, 752 insertions(+)
+ create mode 100644 .Rproj.user/284780B9/console06/9D8433B7
+ create mode 100644 .Rproj.user/284780B9/console06/9D8433B7.env
+ create mode 100644 .Rproj.user/284780B9/console06/INDEX001
+ create mode 100644 .Rproj.user/284780B9/sources/prop/2EFE5642
+ create mode 100644 .Rproj.user/284780B9/sources/prop/A41BB821
+ create mode 100644 .Rproj.user/284780B9/sources/prop/INDEX
+ create mode 100644 .Rproj.user/284780B9/sources/s-9D33684/3F6D23C3-contents
+ create mode 100644 .Rproj.user/284780B9/sources/s-9D33684/7D240C39
+ create mode 100644 .Rproj.user/284780B9/sources/s-9D33684/7D240C39-contents
+ create mode 100644 .Rproj.user/284780B9/sources/s-9D33684/B103C241
+ create mode 100644 .Rproj.user/284780B9/sources/s-9D33684/B103C241-contents
+ create mode 100644 .Rproj.user/284780B9/sources/s-9D33684/F7A91493
+ create mode 100644 .Rproj.user/284780B9/sources/s-9D33684/F7A91493-contents
+ create mode 100644 .Rproj.user/284780B9/sources/s-9D33684/lock_file
+ create mode 100644 .Rproj.user/shared/notebooks/47E89EA4-CongareeTrees/1/284780B99D33684/chunks.json
+ create mode 100644 .Rproj.user/shared/notebooks/47E89EA4-CongareeTrees/1/s/chunks.json
+ create mode 100644 .Rproj.user/shared/notebooks/patch-chunk-names
+ create mode 100644 .Rproj.user/shared/notebooks/paths
+ create mode 100644 CongareeTrees.Rmd
+ create mode 100644 CongareeTrees.Rproj
+ create mode 100644 cong_trees.csv
+]0;~/Documents/RandomAnalyses/CongareeTreesCarters-MacBook-Pro:CongareeTrees carter$ git push
+Counting objects: 32, done.
+Delta compression using up to 8 threads.
+Compressing objects:   3% (1/26)   Compressing objects:   7% (2/26)   Compressing objects:  11% (3/26)   Compressing objects:  15% (4/26)   Compressing objects:  19% (5/26)   Compressing objects:  23% (6/26)   Compressing objects:  26% (7/26)   Compressing objects:  30% (8/26)   Compressing objects:  34% (9/26)   Compressing objects:  38% (10/26)   Compressing objects:  42% (11/26)   Compressing objects:  46% (12/26)   Compressing objects:  50% (13/26)   Compressing objects:  53% (14/26)   Compressing objects:  57% (15/26)   Compressing objects:  61% (16/26)   Compressing objects:  65% (17/26)   Compressing objects:  69% (18/26)   Compressing objects:  73% (19/26)   Compressing objects:  76% (20/26)   Compressing objects:  80% (21/26)   Compressing objects:  84% (22/26)   Compressing objects:  88% (23/26)   Compressing objects:  92% (24/26)   Compressing objects:  96% (25/26)   Compressing objects: 100% (26/26)   Compressing objects: 100% (26/26), done.
+Writing objects:   3% (1/32)   Writing objects:   6% (2/32)   Writing objects:   9% (3/32)   Writing objects:  12% (4/32)   Writing objects:  15% (5/32)   Writing objects:  18% (6/32)   Writing objects:  21% (7/32)   Writing objects:  25% (8/32)   Writing objects:  28% (9/32)   Writing objects:  31% (10/32)   Writing objects:  34% (11/32)   Writing objects:  37% (12/32)   Writing objects:  40% (13/32)   Writing objects:  43% (14/32)   Writing objects:  46% (15/32)   Writing objects:  50% (16/32)   Writing objects:  53% (17/32)   Writing objects:  56% (18/32)   Writing objects:  59% (19/32)   Writing objects:  62% (20/32)   Writing objects:  65% (21/32)   Writing objects:  68% (22/32)   Writing objects:  71% (23/32)   Writing objects:  75% (24/32)   Writing objects:  78% (25/32)   Writing objects:  81% (26/32)   Writing objects:  84% (27/32)   Writing objects:  87% (28/32)   Writing objects:  90% (29/32)   Writing objects:  93% (30/32)   Writing objects:  96% (31/32)   Writing objects: 100% (32/32)   Writing objects: 100% (32/32), 14.83 KiB | 266.00 KiB/s, done.
+Total 32 (delta 0), reused 0 (delta 0)
+To https://github.com/carter-allen/CongareeTrees.git
+   a8ba98b..24da84a  master -> master
+]0;~/Documents/RandomAnalyses/CongareeTreesCarters-MacBook-Pro:CongareeTrees carter$ 

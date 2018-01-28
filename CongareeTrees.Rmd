@@ -6,25 +6,41 @@ output: html_document
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE,cache = TRUE,warning = FALSE,message = FALSE)
+library(tidyverse)
+library(maps)
+library(mapdata)
+library(leaflet)
+library(htmltools)
 ```
 
-## R Markdown
-
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-```{r cars}
-summary(cars)
+```{r}
+cong <- read_csv("https://raw.githubusercontent.com/carter-allen/CongareeTrees/master/cong_trees.csv") %>% 
+  mutate(lat = as.numeric(Latitude_NAD83),
+         lon = as.numeric(Longitude_NAD83))
 ```
 
-## Including Plots
+```{r, include = FALSE}
+tree_ht = 60
+tree_wd = 50
+tree_icon <- makeIcon(iconUrl = "http://catalogue.accasoftware.com/img/Prodotti/15491/PREVIEW/pinus-taeda-loblolly-pine.1.750x527-1_1506495942.PNG",
+                      iconWidth = tree_ht, 
+                      iconHeight = tree_wd,
+                      iconAnchorX = tree_wd/2,
+                      iconAnchorY = tree_ht,
+                      popupAnchorX = tree_wd/2,
+                      popupAnchorY = tree_ht)
 
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
+greenLeafIcon <- makeIcon(
+  iconUrl = "http://leafletjs.com/examples/custom-icons/leaf-green.png",
+  iconWidth = 16, iconHeight = 30,
+  iconAnchorX = 0, iconAnchorY = 0
+)
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+```{r}
+leaflet(data = cong) %>% 
+  addTiles() %>% 
+  addMarkers(~lon,~lat, icon = tree_icon ,label = ~htmlEscape(Common_Nam))
+```
+
