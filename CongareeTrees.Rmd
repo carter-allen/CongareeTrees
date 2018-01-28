@@ -14,33 +14,113 @@ library(leaflet)
 library(htmltools)
 ```
 
+```{r, include = FALSE}
+identify_type <- function(a)
+{
+  if(grepl("pine",a,ignore.case = TRUE))
+  {
+    return("pine")
+  }
+  else if(grepl("cypress",a,ignore.case = TRUE))
+  {
+    return("cypress")
+  }
+  else if(grepl("sweetgum",a,ignore.case = TRUE))
+  {
+    return("sweetgum")
+  }
+  else if(grepl("oak",a,ignore.case = TRUE))
+  {
+    return("oak")
+  }
+  else
+  {
+    return("other")
+  }
+}
+```
+
+```{r, include = FALSE}
+identify_types <- function(avec)
+{
+  len = length(avec)
+  b = avec
+  for(i in 1:len)
+  {
+    b[i] = identify_type(avec[i])
+  }
+  return(b)
+}
+```
+
 ```{r}
 cong <- read_csv("https://raw.githubusercontent.com/carter-allen/CongareeTrees/master/cong_trees.csv") %>% 
   mutate(lat = as.numeric(Latitude_NAD83),
-         lon = as.numeric(Longitude_NAD83))
+         lon = as.numeric(Longitude_NAD83),
+         type = identify_types(Common_Nam))
 ```
 
 ```{r, include = FALSE}
 tree_ht = 60
 tree_wd = 50
-tree_icon <- makeIcon(iconUrl = "http://catalogue.accasoftware.com/img/Prodotti/15491/PREVIEW/pinus-taeda-loblolly-pine.1.750x527-1_1506495942.PNG",
+pine_icon <- makeIcon(iconUrl = "http://catalogue.accasoftware.com/img/Prodotti/15491/PREVIEW/pinus-taeda-loblolly-pine.1.750x527-1_1506495942.PNG",
                       iconWidth = tree_ht, 
                       iconHeight = tree_wd,
                       iconAnchorX = tree_wd/2,
-                      iconAnchorY = tree_ht,
+                      iconAnchorY = tree_ht-5,
                       popupAnchorX = tree_wd/2,
                       popupAnchorY = tree_ht)
 
-greenLeafIcon <- makeIcon(
-  iconUrl = "http://leafletjs.com/examples/custom-icons/leaf-green.png",
-  iconWidth = 16, iconHeight = 30,
-  iconAnchorX = 0, iconAnchorY = 0
+cyp_icon <- makeIcon(iconUrl = "https://vignette.wikia.nocookie.net/fragmented-game/images/4/4b/BaldCypress.png/revision/latest?cb=20160524073937")
+
+sweetgum_icon <- makeIcon(iconUrl = "https://i.pinimg.com/originals/7a/1d/c1/7a1dc1829592fd5c76293935b967cccc.png")
+
+oak_icon <- makeIcon(iconUrl = "https://vignette.wikia.nocookie.net/tome-of-the-unknown/images/2/26/Oak_Tree_0.png/revision/latest?cb=20160814022906")
+
+other_icon <- makeIcon(iconUrl = "http://ostvigtree.com/wp-content/uploads/2017/03/tree-cutting-services.png")
+
+tree_icons <- iconList(
+  pine = makeIcon(iconUrl = "http://catalogue.accasoftware.com/img/Prodotti/15491/PREVIEW/pinus-taeda-loblolly-pine.1.750x527-1_1506495942.PNG",
+                      iconWidth = tree_ht+10, 
+                      iconHeight = tree_wd+20,
+                      iconAnchorX = tree_wd/2,
+                      iconAnchorY = tree_ht-5,
+                      popupAnchorX = tree_wd/2,
+                      popupAnchorY = tree_ht),
+  cypress = makeIcon(iconUrl = "https://vignette.wikia.nocookie.net/fragmented-game/images/4/4b/BaldCypress.png/revision/latest?cb=20160524073937",
+                     iconWidth = tree_ht, 
+                      iconHeight = tree_wd,
+                      iconAnchorX = tree_wd/2,
+                      iconAnchorY = tree_ht-5,
+                      popupAnchorX = tree_wd/2,
+                      popupAnchorY = tree_ht),
+  sweetgum = makeIcon(iconUrl = "https://i.pinimg.com/originals/7a/1d/c1/7a1dc1829592fd5c76293935b967cccc.png",
+                      iconWidth = tree_ht, 
+                      iconHeight = tree_wd,
+                      iconAnchorX = tree_wd/2,
+                      iconAnchorY = tree_ht-5,
+                      popupAnchorX = tree_wd/2,
+                      popupAnchorY = tree_ht),
+  oak = makeIcon(iconUrl = "https://vignette.wikia.nocookie.net/tome-of-the-unknown/images/2/26/Oak_Tree_0.png/revision/latest?cb=20160814022906",
+                 iconWidth = tree_ht-5, 
+                      iconHeight = tree_wd-5,
+                      iconAnchorX = tree_wd/2,
+                      iconAnchorY = tree_ht-5,
+                      popupAnchorX = tree_wd/2,
+                      popupAnchorY = tree_ht),
+  other = makeIcon(iconUrl = "http://ostvigtree.com/wp-content/uploads/2017/03/tree-cutting-services.png",
+                   iconWidth = tree_ht-20, 
+                      iconHeight = tree_wd-20,
+                      iconAnchorX = tree_wd/2,
+                      iconAnchorY = tree_ht-20,
+                      popupAnchorX = tree_wd/2,
+                      popupAnchorY = tree_ht)
 )
 ```
 
 ```{r}
 leaflet(data = cong) %>% 
   addTiles() %>% 
-  addMarkers(~lon,~lat, icon = tree_icon ,label = ~htmlEscape(Common_Nam))
+  addMarkers(~lon,~lat, icon = ~tree_icons[type],label = ~htmlEscape(Common_Nam))
 ```
 
