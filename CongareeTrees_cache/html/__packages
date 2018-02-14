@@ -12,4 +12,6 @@ maps
 mapdata
 leaflet
 htmltools
+knitr
 bindrcpp
+plotly

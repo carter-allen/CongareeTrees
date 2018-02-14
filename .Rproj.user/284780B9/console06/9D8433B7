@@ -96,4 +96,67 @@ Writing objects:   3% (1/32)   Writing objects:   6% (2/32)   Writing objects:
 Total 32 (delta 0), reused 0 (delta 0)
 To https://github.com/carter-allen/CongareeTrees.git
    a8ba98b..24da84a  master -> master
-]0;~/Documents/RandomAnalyses/CongareeTreesCarters-MacBook-Pro:CongareeTrees carter$ 
+[KCarters-MacBook-Pro:CongareeTrees carter$ git staus
+git: 'staus' is not a git command. See 'git --help'.
+
+The most similar command is
+	status
+]0;~/Documents/RandomAnalyses/CongareeTreesCarters-MacBook-Pro:CongareeTrees carter$ git status
+On branch master
+Your branch is up-to-date with 'origin/master'.
+
+Changes not staged for commit:
+  (use "git add/rm <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+	[31mmodified:   .Rproj.user/284780B9/console06/9D8433B7[m
+	[31mmodified:   .Rproj.user/284780B9/console06/9D8433B7.env[m
+	[31mmodified:   .Rproj.user/284780B9/console06/INDEX001[m
+	[31mmodified:   .Rproj.user/284780B9/sources/prop/2EFE5642[m
+	[31mmodified:   .Rproj.user/shared/notebooks/47E89EA4-CongareeTrees/1/s/chunks.json[m
+	[31mmodified:   CongareeTrees.Rmd[m
+	[31mmodified:   CongareeTrees.html[m
+	[31mmodified:   CongareeTrees_cache/html/__packages[m
+	[31mmodified:   CongareeTrees_cache/html/unnamed-chunk-1_08e8707f6faa628d7144250ca06e5646.RData[m
+	[31mmodified:   CongareeTrees_cache/html/unnamed-chunk-1_08e8707f6faa628d7144250ca06e5646.rdb[m
+	[31mmodified:   CongareeTrees_cache/html/unnamed-chunk-2_cb69665f6166f72c242683a7b0419490.RData[m
+	[31mmodified:   CongareeTrees_cache/html/unnamed-chunk-2_cb69665f6166f72c242683a7b0419490.rdb[m
+	[31mmodified:   CongareeTrees_cache/html/unnamed-chunk-2_cb69665f6166f72c242683a7b0419490.rdx[m
+	[31mdeleted:    CongareeTrees_cache/html/unnamed-chunk-3_fdacff732aee5fd294dc207a60d82f24.RData[m
+	[31mdeleted:    CongareeTrees_cache/html/unnamed-chunk-3_fdacff732aee5fd294dc207a60d82f24.rdb[m
+	[31mdeleted:    CongareeTrees_cache/html/unnamed-chunk-3_fdacff732aee5fd294dc207a60d82f24.rdx[m
+	[31mdeleted:    CongareeTrees_cache/html/unnamed-chunk-4_82693cc8b092ed474885f8de31c2cfdb.RData[m
+	[31mdeleted:    CongareeTrees_cache/html/unnamed-chunk-4_82693cc8b092ed474885f8de31c2cfdb.rdb[m
+	[31mdeleted:    CongareeTrees_cache/html/unnamed-chunk-4_82693cc8b092ed474885f8de31c2cfdb.rdx[m
+	[31mdeleted:    CongareeTrees_cache/html/unnamed-chunk-5_9e57bd78ab67ba5854f54361051d53f8.RData[m
+	[31mdeleted:    CongareeTrees_cache/html/unnamed-chunk-5_9e57bd78ab67ba5854f54361051d53f8.rdb[m
+	[31mdeleted:    CongareeTrees_cache/html/unnamed-chunk-5_9e57bd78ab67ba5854f54361051d53f8.rdx[m
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+
+	[31mCongareeTrees_cache/html/unnamed-chunk-3_771dd4224dd481b6f6fbbb7faf1d46ec.RData[m
+	[31mCongareeTrees_cache/html/unnamed-chunk-3_771dd4224dd481b6f6fbbb7faf1d46ec.rdb[m
+	[31mCongareeTrees_cache/html/unnamed-chunk-3_771dd4224dd481b6f6fbbb7faf1d46ec.rdx[m
+	[31mCongareeTrees_cache/html/unnamed-chunk-4_50052a925f3b3357a8c93c46729a7052.RData[m
+	[31mCongareeTrees_cache/html/unnamed-chunk-4_50052a925f3b3357a8c93c46729a7052.rdb[m
+	[31mCongareeTrees_cache/html/unnamed-chunk-4_50052a925f3b3357a8c93c46729a7052.rdx[m
+	[31mCongareeTrees_cache/html/unnamed-chunk-5_56fa6d069eab4b3887aa458da02e58e0.RData[m
+	[31mCongareeTrees_cache/html/unnamed-chunk-5_56fa6d069eab4b3887aa458da02e58e0.rdb[m
+	[31mCongareeTrees_cache/html/unnamed-chunk-5_56fa6d069eab4b3887aa458da02e58e0.rdx[m
+	[31mCongareeTrees_cache/html/unnamed-chunk-6_929ce242fc33a820b67f9796be883786.RData[m
+	[31mCongareeTrees_cache/html/unnamed-chunk-6_929ce242fc33a820b67f9796be883786.rdb[m
+	[31mCongareeTrees_cache/html/unnamed-chunk-6_929ce242fc33a820b67f9796be883786.rdx[m
+	[31mCongareeTrees_cache/html/unnamed-chunk-7_d14642bc53fbfadb8f1504e38e794d58.RData[m
+	[31mCongareeTrees_cache/html/unnamed-chunk-7_d14642bc53fbfadb8f1504e38e794d58.rdb[m
+	[31mCongareeTrees_cache/html/unnamed-chunk-7_d14642bc53fbfadb8f1504e38e794d58.rdx[m
+	[31mCongareeTrees_cache/html/unnamed-chunk-8_466d147d54937acaea6c7d669a1dbe1e.RData[m
+	[31mCongareeTrees_cache/html/unnamed-chunk-8_466d147d54937acaea6c7d669a1dbe1e.rdb[m
+	[31mCongareeTrees_cache/html/unnamed-chunk-8_466d147d54937acaea6c7d669a1dbe1e.rdx[m
+	[31mCongareeTrees_cache/html/unnamed-chunk-9_4458d21991af9c77ae86dd319a24d634.RData[m
+	[31mCongareeTrees_cache/html/unnamed-chunk-9_4458d21991af9c77ae86dd319a24d634.rdb[m
+	[31mCongareeTrees_cache/html/unnamed-chunk-9_4458d21991af9c77ae86dd319a24d634.rdx[m
+	[31mCongareeTrees_files/[m
+
+no changes added to commit (use "git add" and/or "git commit -a")
+]0;~/Documents/RandomAnalyses/CongareeTreesCarters-MacBook-Pro:CongareeTrees carter$ git add -A
